@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DarkSecureTools.com - Secure password generator, strength checker, encryption, and cybersecurity tools by Prof. Dr. Mohammed Musthafa." />
+  <meta name="keywords" content="password generator, password strength checker, encryption tools, cybersecurity, secure data, DarkSecureTools" />
+  <meta name="author" content="Prof. Dr. Mohammed Musthafa" />
+  <title>DarkSecureTools.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --terminal-green: #00FF99;
+      --terminal-blue: #00B7EB;
+      --terminal-bg: #0A0A0A;
+      --terminal-text: #E0E0E0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background-color: var(--terminal-bg);
+      color: var(--terminal-green);
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+      animation: flicker 0.1s ease-in-out 2;
+    }
+
+    /* Background scrolling text */
+    #background-text {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.1;
+      color: var(--terminal-blue);
+      font-size: 0.9rem;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .scroll-text {
+      position: absolute;
+      white-space: nowrap;
+      animation: scroll 20s linear infinite;
+    }
+
+    @keyframes scroll {
+      from { transform: translateY(100vh); }
+      to { transform: translateY(-100%); }
+    }
+
+    /* Scanline effect */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        transparent 0%,
+        transparent 2px,
+        rgba(0, 0, 0, 0.05) 2px,
+        rgba(0, 0, 0, 0.05) 4px
+      );
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    header {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-bottom: 1px solid var(--terminal-green);
+      background-color: rgba(0, 0, 0, 0.5);
+      animation: fadeIn 1s ease-out;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: var(--terminal-green);
+      margin-bottom: 0.5rem;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      color: var(--terminal-blue);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--terminal-green);
+    }
+
+    main {
+      max-width: 600px;
+      margin: 2rem auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 1px solid var(--terminal-green);
+      padding: 1.5rem;
+      border-radius: 4px;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    section h2 {
+      font-size: 1.3rem;
+      color: var(--terminal-blue);
+      border-bottom: 1px dashed var(--terminal-green);
+      padding-bottom: 0.3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    section p {
+      color: var(--terminal-text);
+      font-size: 0.9rem;
+    }
+
+    button {
+      background-color: transparent;
+      color: var(--terminal-green);
+      border: 1px solid var(--terminal-green);
+      padding: 0.4rem 0.8rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    button:hover {
+      background-color: var(--terminal-green);
+      color: var(--terminal-bg);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.8rem;
+      color: var(--terminal-text);
+      border-top: 1px solid var(--terminal-green);
+      background-color: rgba(0, 0, 0, 0.5);
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    footer strong {
+      color: var(--terminal-green);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
+
+      main {
+        margin: 1rem;
+        padding: 1rem;
+      }
+
+      section h2 {
+        font-size: 1.1rem;
+      }
+
+      button {
+        width: 100%;
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="background-text"></div>
+  <header>
+    <h1>DarkSecureTools.com</h1>
+    <nav>
+      <a href="#generator">Password Generator</a>
+      <a href="#checker">Strength Checker</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="generator">
+      <h2>Password Generator</h2>
+      <p>Generate strong, secure, and random passwords instantly.</p>
+      <button>Generate Password</button>
+    </section>
+
+    <section id="checker">
+      <h2>Password Strength Checker</h2>
+      <p>Evaluate password strength and estimate brute-force time.</p>
+      <button>Check Strength</button>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 <strong>DarkSecureTools.com</strong> — A project of Prof. Dr. Mohammed Musthafa. All Rights Reserved.
+  </footer>
+
+  <script>
+    // Random scrolling text for terminal effect
+    const snippets = [
+      'Initializing encryption protocols...',
+      'Scanning for vulnerabilities...',
+      'Hashing data: SHA-256...',
+      'Generating secure keypair...',
+      'Bcrypt salt rounds: 12...',
+      'Firewall status: ACTIVE...',
+      'Decrypting message stream...',
+      'Steganography module loaded...',
+      'Brute-force protection enabled...',
+      'Secure note sharing active...'
+    ];
+
+    const backgroundText = document.getElementById('background-text');
+
+    function createRandomText() {
+      const text = document.createElement('div');
+      text.className = 'scroll-text';
+      text.textContent = snippets[Math.floor(Math.random() * snippets.length)];
+      text.style.left = `${Math.random() * 90}%`;
+      text.style.animationDuration = `${15 + Math.random() * 20}s`;
+      backgroundText.appendChild(text);
+
+      // Remove text after animation
+      setTimeout(() => {
+        text.remove();
+      }, 25000);
+    }
+
+    // Generate new text every 2-4 seconds
+    setInterval(createRandomText, 2000 + Math.random() * 2000);
+    createRandomText(); // Initial text
+  </script>
+</body>
+</html>
